@@ -5,17 +5,55 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #1a1a1a;
+  --secondary: #f5f5f5;
+  --accent: #937341;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --primary: #f5f5f5;
+    --secondary: #1a1a1a;
+    --accent: #c4a875;
   }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-poppins);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-melodrama);
+  font-weight: 500;
+}
+
+.hero-text {
+  font-family: var(--font-melodrama);
+  font-weight: 600;
+}
+
+.cursive-text {
+  font-family: var(--font-whisper);
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 rounded-none text-center inline-block transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl;
+  }
+  
+  .btn-secondary {
+    @apply px-6 py-3 rounded-none text-center inline-block transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl;
+  }
+
+  .nav-link {
+    @apply relative group hover:text-white transition-colors;
+  }
+
+  .nav-link::after {
+    @apply content-[''] absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full;
+  }
 }
