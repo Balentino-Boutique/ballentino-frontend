@@ -11,7 +11,7 @@ const Navbar = () => {
   const { state } = useCart();
 
   return (
-    <nav className="bg-black text-white fixed w-full z-50">
+    <nav className="bg-black text-white fixed w-full z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Left Menu */}
@@ -20,7 +20,7 @@ const Navbar = () => {
               <Link
                 key={item}
                 href={`/${item.toLowerCase().replace(/\s+/g, '-')}`}
-                className="relative group hover:text-white transition-colors"
+                className="relative group hover:text-white transition-colors cursor-pointer"
               >
                 {item}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>

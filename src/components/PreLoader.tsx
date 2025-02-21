@@ -1,17 +1,30 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 const PreLoader = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!isLoading) return null;
+
   const letters = "BALENTINO".split("");
   
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black pointer-events-none"
       initial={{ opacity: 1 }}
       animate={{ opacity: 0 }}
       transition={{ duration: 0.5, delay: 2 }}
-      exit={{ opacity: 0 }}
+      onAnimationComplete={() => setIsLoading(false)}
     >
       <div className="flex">
         {letters.map((letter, index) => (
