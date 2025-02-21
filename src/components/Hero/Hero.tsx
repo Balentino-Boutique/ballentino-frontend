@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
+import Image from "next/image";
+import { motion } from "framer-motion";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -22,11 +22,12 @@ const Hero = () => {
         </div>
         <div className="relative h-full hidden md:block">
           <Image
-            src="https://images.unsplash.com/photo-1602714007833-58fc14b465e0?w=1000&auto=format&fit=crop&q=100"
+            src="https://images.unsplash.com/photo-1602488243711-ffe80e9ec18e?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fHw%3D"
             alt="Fashion model"
             fill
+            unoptimized
             className="object-cover"
-            sizes="50vw"
+            sizes="(max-width: 768px) 100vw, 50vw"
             quality={100}
           />
         </div>
@@ -38,7 +39,7 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 flex h-full items-center justify-center px-4">
         <div className="text-center">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -60,13 +61,13 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex gap-4 justify-center"
           >
-            <Link 
+            <Link
               href="/shop"
               className="bg-white text-black px-8 py-3 text-lg font-medium hover:bg-gray-200 transition-colors"
             >
               Shop Now
             </Link>
-            <Link 
+            <Link
               href="/collections"
               className="border-2 border-white text-white px-8 py-3 text-lg font-medium hover:bg-white hover:text-black transition-colors"
             >
@@ -79,4 +80,4 @@ const Hero = () => {
   );
 };
 
-export default Hero; 
+export default Hero;
