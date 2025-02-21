@@ -40,8 +40,8 @@ export const newArrivals: Product[] = [
     name: 'Urban Street Style',
     price: 45000,
     images: [
-      'https://images.unsplash.com/photo-1602488283247-29bf1f5b148a',
-      'https://images.unsplash.com/photo-1602714007833-58fc14b465e0'
+      'https://images.unsplash.com/photo-1602488283247-29bf1f5b148a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzR8fGJsYWNrJTIwZmFzaGlvbiUyMGJyYW5kfGVufDB8fDB8fHww',
+      'https://images.unsplash.com/photo-1602714007833-58fc14b465e0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTZ8fGJsYWNrJTIwZmFzaGlvbiUyMGJyYW5kfGVufDB8fDB8fHww'
     ],
     description: 'Modern urban streetwear for the fashion-forward',
     category: 'men',
@@ -57,8 +57,8 @@ export const newArrivals: Product[] = [
     name: 'Modern Elegance',
     price: 52000,
     images: [
-      'https://images.unsplash.com/photo-1602714007833-58fc14b465e0',
-      'https://images.unsplash.com/photo-1602488283247-29bf1f5b148a'
+      'https://images.unsplash.com/photo-1602714007833-58fc14b465e0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTZ8fGJsYWNrJTIwZmFzaGlvbiUyMGJyYW5kfGVufDB8fDB8fHww',
+      'https://images.unsplash.com/photo-1602488283247-29bf1f5b148a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzR8fGJsYWNrJTIwZmFzaGlvbiUyMGJyYW5kfGVufDB8fDB8fHww'
     ],
     description: 'Elegant modern fashion piece',
     category: 'women',
@@ -74,8 +74,8 @@ export const newArrivals: Product[] = [
     name: 'Premium Collection',
     price: 63000,
     images: [
-      'https://images.unsplash.com/photo-1699061827014-5365ef3bbe5f',
-      'https://plus.unsplash.com/premium_photo-1669688173849-dea83ce86284'
+      'https://images.unsplash.com/photo-1699061827014-5365ef3bbe5f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODd8fGJsYWNrJTIwZmFzaGlvbiUyMGJyYW5kfGVufDB8fDB8fHww',
+      'https://plus.unsplash.com/premium_photo-1669688173849-dea83ce86284?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fHw%3D'
     ],
     description: 'Premium luxury streetwear collection',
     category: 'men',
@@ -91,8 +91,8 @@ export const newArrivals: Product[] = [
     name: 'Signature Series',
     price: 58000,
     images: [
-      'https://plus.unsplash.com/premium_photo-1669688173849-dea83ce86284',
-      'https://plus.unsplash.com/premium_photo-1713821676452-5f13dcda6744'
+      'https://plus.unsplash.com/premium_photo-1669688173849-dea83ce86284?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fHw%3D',
+      'https://plus.unsplash.com/premium_photo-1713821676452-5f13dcda6744?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGJsYWNrJTIwZmFzaGlvbiUyMGJyYW5kfGVufDB8fDB8fHww'
     ],
     description: 'Signature collection for the bold and stylish',
     category: 'women',
@@ -108,8 +108,8 @@ export const newArrivals: Product[] = [
     name: 'Classic Edition',
     price: 49000,
     images: [
-      'https://images.unsplash.com/photo-1602714007833-58fc14b465e0',
-      'https://images.unsplash.com/photo-1602488283247-29bf1f5b148a'
+      'https://images.unsplash.com/photo-1602714007833-58fc14b465e0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTZ8fGJsYWNrJTIwZmFzaGlvbiUyMGJyYW5kfGVufDB8fDB8fHww',
+      'https://images.unsplash.com/photo-1602488283247-29bf1f5b148a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzR8fGJsYWNrJTIwZmFzaGlvbiUyMGJyYW5kfGVufDB8fDB8fHww'
     ],
     description: 'Timeless classic pieces for any wardrobe',
     category: 'men',
@@ -125,8 +125,8 @@ export const newArrivals: Product[] = [
     name: 'Limited Collection',
     price: 75000,
     images: [
-      'https://images.unsplash.com/photo-1657364891013-8324e4db9dc9',
-      'https://plus.unsplash.com/premium_photo-1669688173849-dea83ce86284'
+      'https://images.unsplash.com/photo-1657364891013-8324e4db9dc9?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHx8',
+      'https://plus.unsplash.com/premium_photo-1669688173849-dea83ce86284?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fHw%3D'
     ],
     description: 'Limited edition designer pieces',
     category: 'women',
@@ -142,8 +142,8 @@ export const newArrivals: Product[] = [
     name: 'Winter Collection',
     price: 68000,
     images: [
-      'https://images.unsplash.com/photo-1602714007833-58fc14b465e0',
-      'https://plus.unsplash.com/premium_photo-1669688173849-dea83ce86284'
+      'https://images.unsplash.com/photo-1602714007833-58fc14b465e0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTZ8fGJsYWNrJTIwZmFzaGlvbiUyMGJyYW5kfGVufDB8fDB8fHww',
+      'https://plus.unsplash.com/premium_photo-1669688173849-dea83ce86284?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fHw%3D'
     ],
     description: 'Warm and stylish winter wear',
     category: 'men',
@@ -159,8 +159,8 @@ export const newArrivals: Product[] = [
     name: 'Urban Luxe',
     price: 55000,
     images: [
-      'https://images.unsplash.com/photo-1602714007833-58fc14b465e0',
-      'https://images.unsplash.com/photo-1699061827014-5365ef3bbe5f'
+      'https://images.unsplash.com/photo-1602714007833-58fc14b465e0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTZ8fGJsYWNrJTIwZmFzaGlvbiUyMGJyYW5kfGVufDB8fDB8fHww',
+      'https://images.unsplash.com/photo-1699061827014-5365ef3bbe5f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODd8fGJsYWNrJTIwZmFzaGlvbiUyMGJyYW5kfGVufDB8fDB8fHww'
     ],
     description: 'Luxury urban streetwear collection',
     category: 'men',
@@ -176,8 +176,8 @@ export const newArrivals: Product[] = [
     name: 'Designer Series',
     price: 82000,
     images: [
-      'https://images.unsplash.com/photo-1699061827014-5365ef3bbe5f',
-      'https://plus.unsplash.com/premium_photo-1713821676452-5f13dcda6744'
+      'https://images.unsplash.com/photo-1699061827014-5365ef3bbe5f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODd8fGJsYWNrJTIwZmFzaGlvbiUyMGJyYW5kfGVufDB8fDB8fHww',
+      'https://plus.unsplash.com/premium_photo-1713821676452-5f13dcda6744?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGJsYWNrJTIwZmFzaGlvbiUyMGJyYW5kfGVufDB8fDB8fHww'
     ],
     description: 'Designer collection for the fashion-forward',
     category: 'women',
@@ -193,8 +193,8 @@ export const newArrivals: Product[] = [
     name: 'Premium Edition',
     price: 71000,
     images: [
-      'https://images.unsplash.com/photo-1602714007833-58fc14b465e0',
-      'https://plus.unsplash.com/premium_photo-1669688173849-dea83ce86284'
+      'https://images.unsplash.com/photo-1602714007833-58fc14b465e0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTZ8fGJsYWNrJTIwZmFzaGlvbiUyMGJyYW5kfGVufDB8fDB8fHww',
+      'https://plus.unsplash.com/premium_photo-1669688173849-dea83ce86284?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fHw%3D'
     ],
     description: 'Premium edition luxury wear',
     category: 'men',

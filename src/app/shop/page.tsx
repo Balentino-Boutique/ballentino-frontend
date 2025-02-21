@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import ProductGrid from '@/components/Shop/ProductGrid';
 import FilterBar from '@/components/Shop/FilterBar';
 import CustomDropdown from '@/components/Shop/CustomDropdown';
+import PriceRangeSlider from '@/components/Shop/PriceRangeSlider';
 import { FilterState, Product, ProductCategory } from '@/types';
 import { newArrivals } from '@/data/products';
 import { FunnelIcon } from '@heroicons/react/24/outline';
@@ -31,28 +32,32 @@ export default function ShopPage() {
     { label: 'Popular', value: 'popular' }
   ];
 
+  // Define the menu items with exact ProductType values
+  const menCategories: ProductType[] = ['t-shirts', 'hoodies', 'pants', 'shoes', 'bags', 'accessories'];
+  const womenCategories: ProductType[] = ['dresses', 't-shirts', 'pants', 'bags', 'accessories'];
+
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Header - White background with black text */}
-      <div className="text-center py-24 bg-white">
-        <h1 className="text-4xl md:text-5xl font-melodrama mb-4 text-black">
+      {/* Header - More responsive padding */}
+      <div className="text-center py-16 md:py-24 bg-white px-4">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-melodrama mb-4 text-black">
           {filters.category === 'all' ? 'All Products' : 
             filters.category === 'men' ? 'Men\'s Collection' : 'Women\'s Collection'}
         </h1>
-        <p className="text-gray-600 max-w-2xl mx-auto px-4">
+        <p className="text-gray-600 max-w-2xl mx-auto text-sm md:text-base">
           Discover our curated collection of premium fashion pieces designed for style and comfort.
         </p>
       </div>
 
-      {/* New Filter Bar */}
-      <div className="sticky top-20 bg-black z-50 border-b border-gray-800">
+      {/* Filter Bar - Mobile optimized */}
+      <div className="sticky top-16 md:top-20 bg-black z-50 border-b border-gray-800">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="py-4 flex justify-between items-center">
-            {/* Left side - Main categories */}
-            <div className="flex gap-6">
+          <div className="py-4 flex flex-col md:flex-row md:justify-between md:items-center gap-4 md:gap-0">
+            {/* Categories - Scrollable on mobile */}
+            <div className="flex gap-6 overflow-x-auto hide-scrollbar whitespace-nowrap pb-2 md:pb-0">
               <button
                 onClick={() => setFilters({ ...filters, category: 'all' })}
-                className={`text-sm font-melodrama transition-colors ${
+                className={`text-base md:text-lg font-melodrama transition-colors flex-shrink-0 ${
                   filters.category === 'all' ? 'text-accent' : 'text-white hover:text-accent'
                 }`}
               >
@@ -60,7 +65,7 @@ export default function ShopPage() {
               </button>
               <button
                 onClick={() => setFilters({ ...filters, category: 'men' })}
-                className={`text-sm font-melodrama transition-colors ${
+                className={`text-base md:text-lg font-melodrama transition-colors flex-shrink-0 ${
                   filters.category === 'men' ? 'text-accent' : 'text-white hover:text-accent'
                 }`}
               >
@@ -68,7 +73,7 @@ export default function ShopPage() {
               </button>
               <button
                 onClick={() => setFilters({ ...filters, category: 'women' })}
-                className={`text-sm font-melodrama transition-colors ${
+                className={`text-base md:text-lg font-melodrama transition-colors flex-shrink-0 ${
                   filters.category === 'women' ? 'text-accent' : 'text-white hover:text-accent'
                 }`}
               >
@@ -76,7 +81,7 @@ export default function ShopPage() {
               </button>
               <button
                 onClick={() => setFilters({ ...filters, newArrival: !filters.newArrival })}
-                className={`text-sm font-melodrama transition-colors ${
+                className={`text-base md:text-lg font-melodrama transition-colors flex-shrink-0 ${
                   filters.newArrival ? 'text-accent' : 'text-white hover:text-accent'
                 }`}
               >
@@ -84,10 +89,12 @@ export default function ShopPage() {
               </button>
             </div>
 
-            {/* Right side - Filter and Sort */}
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-4">
-                <span className="text-gray-300 font-melodrama">{newArrivals.length} products</span>
+            {/* Sort and Filter - Stack on mobile */}
+            <div className="flex items-center justify-between md:justify-end gap-4">
+              <div className="flex items-center gap-2 md:gap-4">
+                <span className="text-gray-300 font-melodrama text-sm md:text-base">
+                  {newArrivals.length} products
+                </span>
                 <CustomDropdown
                   value={filters.sortBy}
                   onChange={(value) => setFilters(prev => ({ ...prev, sortBy: value as any }))}
@@ -95,80 +102,87 @@ export default function ShopPage() {
                 />
               </div>
               
-              {/* Filter Button */}
               <button
                 onClick={() => setIsFilterMenuOpen(!isFilterMenuOpen)}
-                className="flex items-center gap-2 px-4 py-2 border border-gray-700 rounded-md hover:border-white transition-colors font-melodrama"
+                className="flex items-center gap-2 px-3 md:px-4 py-2 border border-gray-700 rounded-md hover:border-white transition-colors font-melodrama text-sm md:text-base"
               >
                 <FunnelIcon className="w-4 h-4" />
-                Filter
+                <span className="hidden md:inline">Filter</span>
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Filter Dropdown Menu */}
+      {/* Filter Menu - Full screen on mobile */}
       {isFilterMenuOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-[60]">
-          <div className="absolute right-0 top-0 h-full w-80 bg-black border-l border-gray-800 p-6">
+          <div className="absolute right-0 top-0 h-full w-full md:w-80 bg-black border-l border-gray-800 p-4 md:p-6 overflow-y-auto">
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-lg font-melodrama">Filters</h3>
-              <button onClick={() => setIsFilterMenuOpen(false)}>&times;</button>
+              <button 
+                onClick={() => setIsFilterMenuOpen(false)}
+                className="w-8 h-8 flex items-center justify-center text-2xl"
+              >
+                &times;
+              </button>
             </div>
 
-            {/* Men's Categories */}
-            <div className="mb-6">
-              <h4 className="font-medium mb-3">Men</h4>
-              <div className="space-y-2">
-                {['T-Shirts', 'Hoodies', 'Pants', 'Watches', 'Bags'].map((type) => (
-                  <button
-                    key={type}
-                    onClick={() => {
-                      setFilters({ ...filters, category: 'men', type: type.toLowerCase() });
-                      setIsFilterMenuOpen(false);
-                    }}
-                    className="block w-full text-left px-2 py-1 hover:text-accent transition-colors"
-                  >
-                    {type}
-                  </button>
-                ))}
+            {/* Filter Categories - Better spacing on mobile */}
+            <div className="space-y-8">
+              {/* Men's Categories */}
+              <div className="mb-6">
+                <h4 className="font-melodrama mb-4">Men</h4>
+                <div className="space-y-3">
+                  {menCategories.map((type) => (
+                    <button
+                      key={type}
+                      onClick={() => {
+                        setFilters({ ...filters, category: 'men', type });
+                        setIsFilterMenuOpen(false);
+                      }}
+                      className="block w-full text-left px-2 py-2 hover:text-accent transition-colors"
+                    >
+                      {type.charAt(0).toUpperCase() + type.slice(1)}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            {/* Women's Categories */}
-            <div className="mb-6">
-              <h4 className="font-medium mb-3">Women</h4>
-              <div className="space-y-2">
-                {['Dresses', 'T-Shirts', 'Pants', 'Bags', 'Accessories'].map((type) => (
-                  <button
-                    key={type}
-                    onClick={() => {
-                      setFilters({ ...filters, category: 'women', type: type.toLowerCase() });
-                      setIsFilterMenuOpen(false);
-                    }}
-                    className="block w-full text-left px-2 py-1 hover:text-accent transition-colors"
-                  >
-                    {type}
-                  </button>
-                ))}
+              {/* Women's Categories */}
+              <div className="mb-6">
+                <h4 className="font-melodrama mb-4">Women</h4>
+                <div className="space-y-3">
+                  {womenCategories.map((type) => (
+                    <button
+                      key={type}
+                      onClick={() => {
+                        setFilters({ ...filters, category: 'women', type });
+                        setIsFilterMenuOpen(false);
+                      }}
+                      className="block w-full text-left px-2 py-2 hover:text-accent transition-colors"
+                    >
+                      {type.charAt(0).toUpperCase() + type.slice(1)}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            {/* Price Range */}
-            <div className="mb-6">
-              <h4 className="font-medium mb-3">Price Range</h4>
-              <PriceRangeSlider
-                value={filters.priceRange}
-                onChange={(range) => setFilters({ ...filters, priceRange: range })}
-              />
+              {/* Price Range */}
+              <div className="mb-6">
+                <h4 className="font-melodrama mb-4">Price Range</h4>
+                <PriceRangeSlider
+                  value={filters.priceRange}
+                  onChange={(range) => setFilters({ ...filters, priceRange: range })}
+                />
+              </div>
             </div>
           </div>
         </div>
       )}
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      {/* Product Grid - Responsive grid */}
+      <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
         <ProductGrid products={newArrivals} />
       </div>
     </div>

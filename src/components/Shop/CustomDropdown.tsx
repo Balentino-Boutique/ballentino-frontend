@@ -30,10 +30,10 @@ export default function CustomDropdown({ value, onChange, options }: CustomDropd
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-4 py-2 bg-black border border-gray-700 rounded-md hover:border-white transition-colors min-w-[160px] font-melodrama"
+        className="flex items-center gap-2 px-3 md:px-4 py-2 bg-black border border-gray-700 rounded-md hover:border-white transition-colors min-w-[120px] md:min-w-[160px] font-melodrama text-sm md:text-base"
       >
-        <span className="flex-1 text-left">{selectedOption?.label}</span>
-        <ChevronDownIcon className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <span className="flex-1 text-left truncate">{selectedOption?.label}</span>
+        <ChevronDownIcon className={`w-4 h-4 flex-shrink-0 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {isOpen && (
@@ -45,7 +45,7 @@ export default function CustomDropdown({ value, onChange, options }: CustomDropd
                 onChange(option.value);
                 setIsOpen(false);
               }}
-              className={`w-full text-left px-4 py-2 hover:bg-gray-800 transition-colors font-melodrama ${
+              className={`w-full text-left px-4 py-2 text-sm md:text-base hover:bg-gray-800 transition-colors font-melodrama ${
                 value === option.value ? 'text-accent' : ''
               }`}
             >
