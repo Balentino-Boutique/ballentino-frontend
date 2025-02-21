@@ -8,7 +8,15 @@ import { ShoppingBagIcon, UserIcon } from '@heroicons/react/24/outline';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { state } = useCart();
+  const { setIsCartOpen, state } = useCart();
+
+  // Update the navigation links
+  const navLinks = [
+    { name: "WHAT'S NEW", href: '/whats-new' },
+    { name: 'MEN', href: '/shop?category=men' },
+    { name: 'WOMEN', href: '/shop?category=women' },
+    { name: 'WHO WE ARE', href: '/about' }
+  ];
 
   return (
     <nav className="bg-black text-white fixed w-full z-40">
@@ -16,13 +24,13 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-20">
           {/* Left Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            {['WHAT\'S NEW', 'MEN', 'WOMEN', 'WHO WE ARE'].map((item) => (
+            {navLinks.map((link) => (
               <Link
-                key={item}
-                href={`/${item.toLowerCase().replace(/\s+/g, '-')}`}
+                key={link.name}
+                href={link.href}
                 className="relative group hover:text-white transition-colors cursor-pointer"
               >
-                {item}
+                {link.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
               </Link>
             ))}
@@ -40,30 +48,33 @@ const Navbar = () => {
             <Link href="/account">
               <UserIcon className="h-5 w-5" />
             </Link>
-            <Link href="/cart" className="relative">
-              <ShoppingBagIcon className="h-5 w-5" />
+            <button
+              onClick={() => setIsCartOpen(true)}
+              className="relative p-2 hover:text-accent transition-colors"
+              aria-label="Open cart"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+              </svg>
               {state.items.length > 0 && (
-                <motion.span
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  className="absolute -top-2 -right-2 bg-accent text-white rounded-full w-4 h-4 flex items-center justify-center text-xs"
-                >
+                <span className="absolute -top-1 -right-1 bg-accent text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
                   {state.items.length}
-                </motion.span>
+                </span>
               )}
-            </Link>
+            </button>
           </div>
 
           {/* Mobile menu button and cart */}
           <div className="md:hidden flex items-center space-x-4">
-            <Link href="/cart" className="relative">
-              <ShoppingBagIcon className="h-5 w-5" />
-              {state.items.length > 0 && (
-                <span className="absolute -top-2 -right-2 bg-accent text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">
-                  {state.items.length}
-                </span>
-              )}
-            </Link>
+            <button
+              onClick={() => setIsCartOpen(true)}
+              className="relative p-2 hover:text-accent transition-colors"
+              aria-label="Open cart"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+              </svg>
+            </button>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-white"
@@ -93,34 +104,16 @@ const Navbar = () => {
             className="md:hidden bg-black"
           >
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <Link
-                href="/whats-new"
-                className="block px-3 py-2 text-base font-medium hover:text-accent"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                WHAT'S NEW
-              </Link>
-              <Link
-                href="/men"
-                className="block px-3 py-2 text-base font-medium hover:text-accent"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                MEN
-              </Link>
-              <Link
-                href="/women"
-                className="block px-3 py-2 text-base font-medium hover:text-accent"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                WOMEN
-              </Link>
-              <Link
-                href="/about"
-                className="block px-3 py-2 text-base font-medium hover:text-accent"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                WHO WE ARE
-              </Link>
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="block px-3 py-2 text-base font-medium hover:text-accent"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.name}
+                </Link>
+              ))}
             </div>
           </motion.div>
         )}

@@ -1,0 +1,176 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
+import ProductGrid from '@/components/Shop/ProductGrid';
+import FilterBar from '@/components/Shop/FilterBar';
+import CustomDropdown from '@/components/Shop/CustomDropdown';
+import { FilterState, Product, ProductCategory } from '@/types';
+import { newArrivals } from '@/data/products';
+import { FunnelIcon } from '@heroicons/react/24/outline';
+
+export default function ShopPage() {
+  const searchParams = useSearchParams();
+  const initialCategory = (searchParams.get('category') as ProductCategory) || 'all';
+
+  const [filters, setFilters] = useState<FilterState>({
+    category: initialCategory,
+    type: 'all',
+    priceRange: [0, 1000000],
+    colors: [],
+    sizes: [],
+    sortBy: 'newest'
+  });
+
+  const [isFilterMenuOpen, setIsFilterMenuOpen] = useState(false);
+
+  const sortOptions = [
+    { label: 'Newest', value: 'newest' },
+    { label: 'Price: Low to High', value: 'price-asc' },
+    { label: 'Price: High to Low', value: 'price-desc' },
+    { label: 'Popular', value: 'popular' }
+  ];
+
+  return (
+    <div className="min-h-screen bg-black text-white">
+      {/* Header - White background with black text */}
+      <div className="text-center py-24 bg-white">
+        <h1 className="text-4xl md:text-5xl font-melodrama mb-4 text-black">
+          {filters.category === 'all' ? 'All Products' : 
+            filters.category === 'men' ? 'Men\'s Collection' : 'Women\'s Collection'}
+        </h1>
+        <p className="text-gray-600 max-w-2xl mx-auto px-4">
+          Discover our curated collection of premium fashion pieces designed for style and comfort.
+        </p>
+      </div>
+
+      {/* New Filter Bar */}
+      <div className="sticky top-20 bg-black z-50 border-b border-gray-800">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="py-4 flex justify-between items-center">
+            {/* Left side - Main categories */}
+            <div className="flex gap-6">
+              <button
+                onClick={() => setFilters({ ...filters, category: 'all' })}
+                className={`text-sm font-melodrama transition-colors ${
+                  filters.category === 'all' ? 'text-accent' : 'text-white hover:text-accent'
+                }`}
+              >
+                All Products
+              </button>
+              <button
+                onClick={() => setFilters({ ...filters, category: 'men' })}
+                className={`text-sm font-melodrama transition-colors ${
+                  filters.category === 'men' ? 'text-accent' : 'text-white hover:text-accent'
+                }`}
+              >
+                Men
+              </button>
+              <button
+                onClick={() => setFilters({ ...filters, category: 'women' })}
+                className={`text-sm font-melodrama transition-colors ${
+                  filters.category === 'women' ? 'text-accent' : 'text-white hover:text-accent'
+                }`}
+              >
+                Women
+              </button>
+              <button
+                onClick={() => setFilters({ ...filters, newArrival: !filters.newArrival })}
+                className={`text-sm font-melodrama transition-colors ${
+                  filters.newArrival ? 'text-accent' : 'text-white hover:text-accent'
+                }`}
+              >
+                New Arrivals
+              </button>
+            </div>
+
+            {/* Right side - Filter and Sort */}
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4">
+                <span className="text-gray-300 font-melodrama">{newArrivals.length} products</span>
+                <CustomDropdown
+                  value={filters.sortBy}
+                  onChange={(value) => setFilters(prev => ({ ...prev, sortBy: value as any }))}
+                  options={sortOptions}
+                />
+              </div>
+              
+              {/* Filter Button */}
+              <button
+                onClick={() => setIsFilterMenuOpen(!isFilterMenuOpen)}
+                className="flex items-center gap-2 px-4 py-2 border border-gray-700 rounded-md hover:border-white transition-colors font-melodrama"
+              >
+                <FunnelIcon className="w-4 h-4" />
+                Filter
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Filter Dropdown Menu */}
+      {isFilterMenuOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-[60]">
+          <div className="absolute right-0 top-0 h-full w-80 bg-black border-l border-gray-800 p-6">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-lg font-melodrama">Filters</h3>
+              <button onClick={() => setIsFilterMenuOpen(false)}>&times;</button>
+            </div>
+
+            {/* Men's Categories */}
+            <div className="mb-6">
+              <h4 className="font-medium mb-3">Men</h4>
+              <div className="space-y-2">
+                {['T-Shirts', 'Hoodies', 'Pants', 'Watches', 'Bags'].map((type) => (
+                  <button
+                    key={type}
+                    onClick={() => {
+                      setFilters({ ...filters, category: 'men', type: type.toLowerCase() });
+                      setIsFilterMenuOpen(false);
+                    }}
+                    className="block w-full text-left px-2 py-1 hover:text-accent transition-colors"
+                  >
+                    {type}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Women's Categories */}
+            <div className="mb-6">
+              <h4 className="font-medium mb-3">Women</h4>
+              <div className="space-y-2">
+                {['Dresses', 'T-Shirts', 'Pants', 'Bags', 'Accessories'].map((type) => (
+                  <button
+                    key={type}
+                    onClick={() => {
+                      setFilters({ ...filters, category: 'women', type: type.toLowerCase() });
+                      setIsFilterMenuOpen(false);
+                    }}
+                    className="block w-full text-left px-2 py-1 hover:text-accent transition-colors"
+                  >
+                    {type}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Price Range */}
+            <div className="mb-6">
+              <h4 className="font-medium mb-3">Price Range</h4>
+              <PriceRangeSlider
+                value={filters.priceRange}
+                onChange={(range) => setFilters({ ...filters, priceRange: range })}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <ProductGrid products={newArrivals} />
+      </div>
+    </div>
+  );
+} 

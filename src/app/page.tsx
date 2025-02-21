@@ -10,6 +10,7 @@ import Hero from '@/components/Hero/Hero';
 import ImageGrid from '@/components/ImageGrid/ImageGrid';
 import { useRef } from 'react';
 import { newArrivals } from '@/data/products';
+import { useCart } from '@/context/CartContext';
 
 const fashionImages = [
   {
@@ -32,6 +33,7 @@ const fashionImages = [
 
 export default function Home() {
   const sliderRef = useRef<HTMLDivElement>(null);
+  const { dispatch, showNotification, setIsCartOpen } = useCart();
 
   const scroll = (direction: 'left' | 'right') => {
     if (sliderRef.current) {
@@ -94,9 +96,6 @@ export default function Home() {
                     quality={100}
                     placeholder="blur"
                     blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx0fHRsdHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR3/2wBDAR0XFyAeIRshGxsdIR0hHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR3/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
-                    onError={(e) => {
-                      console.error('Error loading image:', e);
-                    }}
                   />
                   <Image
                     src={product.images[1]}
@@ -105,45 +104,70 @@ export default function Home() {
                     className="object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                     sizes="300px"
                     quality={100}
-                    onError={(e) => {
-                      console.error('Error loading image:', e);
-                    }}
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx0fHRsdHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR3/2wBDAR0XFyAeIRshGxsdIR0hHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR3/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
                   />
                   {/* Quick Shop Overlay */}
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-center items-center gap-4">
+                    {/* Quick Add Instructions */}
+                    <p className="text-white text-center font-melodrama mb-2">
+                      Select size to add to cart
+                    </p>
+                    
                     {/* Size Selection */}
                     <div className="flex gap-2">
                       {['S', 'M', 'L', 'XL'].map((size) => (
                         <button
                           key={size}
-                          className="w-10 h-10 bg-white text-black font-melodrama hover:bg-accent hover:text-white transition-colors duration-300 flex items-center justify-center"
-                          onError={(e) => {
-                            console.error('Error loading button:', e);
+                          onClick={(e) => {
+                            e.preventDefault();
+                            dispatch({
+                              type: 'ADD_TO_CART',
+                              payload: {
+                                product: {
+                                  id: product.id,
+                                  name: product.name,
+                                  price: product.price,
+                                  images: product.images,
+                                  description: '',
+                                  category: 'men',
+                                  type: 't-shirts',
+                                  sizes: ['S', 'M', 'L', 'XL'],
+                                  colors: ['black', 'white'],
+                                  inStock: true
+                                },
+                                size: size,
+                              }
+                            });
+                            showNotification(`Added ${product.name} (Size ${size}) to cart`, 'success');
+                            setIsCartOpen(true);
                           }}
+                          className="w-10 h-10 bg-white text-black font-melodrama 
+                            hover:bg-accent hover:text-white transition-colors duration-300 
+                            flex items-center justify-center relative group/size"
                         >
                           {size}
+                          {/* Tooltip */}
+                          <span className="absolute -top-8 left-1/2 -translate-x-1/2 
+                            bg-white text-black text-xs py-1 px-2 rounded opacity-0 
+                            group-hover/size:opacity-100 whitespace-nowrap pointer-events-none
+                            transition-opacity duration-200">
+                            Add to cart (Size {size})
+                          </span>
                         </button>
                       ))}
                     </div>
                     
-                    {/* Add to Cart Button */}
-                    <button className="bg-accent text-white px-6 py-3 font-melodrama hover:bg-accent/90 transition-all duration-300 flex items-center gap-2 group/btn">
-                      Add to Cart
-                      <span className="transform group-hover/btn:translate-x-1 transition-transform duration-300">
-                        →
-                      </span>
-                    </button>
-                    
-                    {/* Quick View Button */}
-                    <Link 
-                      href={`/product/${product.id}`}
-                      className="text-white underline-offset-4 hover:underline font-melodrama mt-2"
-                      onError={(e) => {
-                        console.error('Error loading link:', e);
-                      }}
-                    >
-                      Quick View
-                    </Link>
+                    <div className="flex flex-col items-center gap-2 mt-2">
+                      {/* View Details Button */}
+                      <Link 
+                        href={`/product/${product.id}`}
+                        className="text-white bg-black/50 px-4 py-2 rounded hover:bg-black 
+                          transition-colors duration-300 font-melodrama text-sm"
+                      >
+                        View Full Details →
+                      </Link>
+                    </div>
                   </div>
                 </div>
                 
