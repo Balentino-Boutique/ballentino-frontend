@@ -1,40 +1,7 @@
 import { Product } from '../types';
 
+// Single consolidated products array
 export const products: Product[] = [
-  {
-    id: '1',
-    name: 'Classic Black Dress',
-    price: 45000,
-    images: [
-      'https://images.unsplash.com/photo-1539008835657-9e8e9680c956',
-      'https://images.unsplash.com/photo-1539008835657-9e8e9680c957',
-    ],
-    description: 'Elegant black dress perfect for any occasion',
-    category: 'women',
-    type: 'dresses',
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
-    colors: ['black'],
-    inStock: true
-  },
-  {
-    id: '2',
-    name: 'Ankara Print Jumpsuit',
-    price: 38000,
-    images: [
-      'https://images.unsplash.com/photo-1583846783214-7229a91b20ed',
-      'https://images.unsplash.com/photo-1583846783214-7229a91b20ee',
-    ],
-    description: 'Modern African print jumpsuit with contemporary styling',
-    category: 'women',
-    type: 'dresses',
-    sizes: ['S', 'M', 'L'],
-    colors: ['multicolor'],
-    inStock: true
-  },
-  // Add more products as needed
-];
-
-export const newArrivals: Product[] = [
   {
     id: 'new-1',
     name: 'Urban Street Style',
@@ -204,11 +171,7 @@ export const newArrivals: Product[] = [
     inStock: true,
     featured: true,
     newArrival: true
-  }
-];
-
-// Add these new products after your existing ones in newArrivals array
-export const additionalProducts: Product[] = [
+  },
   {
     id: 'p-1',
     name: 'Leather Weekend Bag',
@@ -232,7 +195,7 @@ export const additionalProducts: Product[] = [
     price: 150000,
     images: [
       'https://images.unsplash.com/photo-1622434641406-a158123450f9',
-      'https://images.unsplash.com/photo-1617714651073-27f0f7517fed'
+      'https://images.unsplash.com/photo-1622434641406-a158123450f9'
     ],
     description: 'Elegant chronograph watch with leather strap',
     category: 'men',
@@ -266,7 +229,7 @@ export const additionalProducts: Product[] = [
     price: 45000,
     images: [
       'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338',
-      'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f'
+      'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338'
     ],
     description: 'Elegant pearl necklace and earring set',
     category: 'women',
@@ -283,7 +246,7 @@ export const additionalProducts: Product[] = [
     price: 28000,
     images: [
       'https://images.unsplash.com/photo-1631160246898-58192f971b5f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGxlYXRoZXIlMjBiZWx0fGVufDB8fDB8fHww',
-      'https://images.unsplash.com/photo-1624222247762-0699bfff5712'
+      'https://images.unsplash.com/photo-1631160246898-58192f971b5f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGxlYXRoZXIlMjBiZWx0fGVufDB8fDB8fHww'
     ],
     description: 'Premium leather belt with classic buckle',
     category: 'men',
@@ -311,6 +274,74 @@ export const additionalProducts: Product[] = [
     featured: true,
     newArrival: false
   },
+  {
+    id: 'p-7',
+    name: 'Leather Loafers',
+    price: 89000,
+    images: [
+      'https://plus.unsplash.com/premium_photo-1705352059915-971c8c90624e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGxvYWZlcnN8ZW58MHx8MHx8fDA%3D',
+      'https://plus.unsplash.com/premium_photo-1705352059915-971c8c90624e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGxvYWZlcnN8ZW58MHx8MHx8fDA%3D'
+    ],
+    description: 'Classic leather loafers for the modern gentleman',
+    category: 'men',
+    type: 'shoes',
+    sizes: ['40', '41', '42', '43', '44'],
+    colors: ['black', 'brown'],
+    inStock: true,
+    featured: true,
+    newArrival: false
+  },
+  {
+    id: 'p-8',
+    name: 'Designer Sunglasses',
+    price: 42000,
+    images: [
+      'https://images.unsplash.com/photo-1508296695146-257a814070b4',
+      'https://images.unsplash.com/photo-1508296695146-257a814070b4'
+    ],
+    description: 'Luxury designer sunglasses',
+    category: 'men',
+    type: 'accessories',
+    sizes: ['ONE SIZE'],
+    colors: ['black', 'gold'],
+    inStock: true,
+    featured: false,
+    newArrival: false
+  },
+  {
+    id: 'p-9',
+    name: 'Evening Gown',
+    price: 125000,
+    images: [
+      'https://images.unsplash.com/photo-1595777457583-95e059d581b8',
+      'https://images.unsplash.com/photo-1595777457583-95e059d581b8'
+    ],
+    description: 'Elegant evening gown for special occasions',
+    category: 'women',
+    type: 'dresses',
+    sizes: ['XS', 'S', 'M', 'L'],
+    colors: ['black', 'red'],
+    inStock: true,
+    featured: true,
+    newArrival: false
+  },
+  {
+    id: 'p-10',
+    name: 'Silk Scarf',
+    price: 35000,
+    images: [
+      'https://images.unsplash.com/photo-1584030373081-f37b7bb4fa8e',
+      'https://images.unsplash.com/photo-1584030373081-f37b7bb4fa8e'
+    ],
+    description: 'Luxury silk scarf with designer print',
+    category: 'women',
+    type: 'accessories',
+    sizes: ['ONE SIZE'],
+    colors: ['multicolor'],
+    inStock: true,
+    featured: false,
+    newArrival: false
+  },
   // {
   //   id: 'p-7',
   //   name: 'Smart Watch',
@@ -328,7 +359,4 @@ export const additionalProducts: Product[] = [
   //   featured: true,
   //   newArrival: false
   // }
-];
-
-// Update your products array to include both new and existing products
-export const allProducts = [...newArrivals, ...additionalProducts]; 
+]; 

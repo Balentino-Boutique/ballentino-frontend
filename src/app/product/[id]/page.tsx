@@ -4,7 +4,7 @@ import { useState, useRef } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useCart } from '@/context/CartContext';
-import { newArrivals } from '@/data/products';
+import { products } from '@/data/products';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 
@@ -18,7 +18,7 @@ export default function ProductPage() {
   const sliderRef = useRef<HTMLDivElement>(null);
 
   // Find product from your data
-  const product = newArrivals.find(p => p.id === params.id);
+  const product = products.find(p => p.id === params.id);
 
   if (!product) return <div>Product not found</div>;
 
@@ -64,6 +64,10 @@ export default function ProductPage() {
       });
     }
   };
+
+  const similarProducts = products.filter(p => 
+    p.id !== params.id && p.category === product?.category
+  ).slice(0, 4);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-16">
@@ -231,7 +235,7 @@ export default function ProductPage() {
             ref={sliderRef}
             className="flex gap-8 overflow-x-auto pb-8 hide-scrollbar scroll-smooth"
           >
-            {newArrivals.map((product) => (
+            {similarProducts.map((product) => (
               <div key={product.id} className="interactive-element group min-w-[300px] w-[300px]">
                 <div className="relative h-[400px] overflow-hidden rounded-lg">
                   <Image

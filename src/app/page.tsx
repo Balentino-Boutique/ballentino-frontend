@@ -9,7 +9,6 @@ import PreLoader from '@/components/PreLoader';
 import Hero from '@/components/Hero/Hero';
 import ImageGrid from '@/components/ImageGrid/ImageGrid';
 import { useRef } from 'react';
-import { newArrivals } from '@/data/products';
 import { useCart } from '@/context/CartContext';
 
 const fashionImages = [
@@ -30,6 +29,8 @@ const fashionImages = [
     alt: "Premium fashion look"
   }
 ];
+
+const newArrivalsProducts = products.filter(product => product.newArrival);
 
 export default function Home() {
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -84,7 +85,7 @@ export default function Home() {
             ref={sliderRef}
             className="flex gap-8 overflow-x-auto pb-8 hide-scrollbar scroll-smooth"
           >
-            {newArrivals.map((product) => (
+            {newArrivalsProducts.map((product) => (
               <div key={product.id} className="interactive-element group min-w-[300px] w-[300px]">
                 <div className="relative h-[400px] overflow-hidden rounded-lg">
                   <Image

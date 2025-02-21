@@ -7,7 +7,7 @@ import FilterBar from '@/components/Shop/FilterBar';
 import CustomDropdown from '@/components/Shop/CustomDropdown';
 import PriceRangeSlider from '@/components/Shop/PriceRangeSlider';
 import { FilterState, Product, ProductCategory, ProductType } from '@/types';
-import { allProducts } from '@/data/products';
+import { products } from '@/data/products';
 import { FunnelIcon } from '@heroicons/react/24/outline';
 
 export default function ShopPage() {
@@ -35,6 +35,14 @@ export default function ShopPage() {
   // Define the menu items with exact ProductType values
   const menCategories: ProductType[] = ['t-shirts', 'hoodies', 'pants', 'shoes', 'bags', 'accessories'];
   const womenCategories: ProductType[] = ['dresses', 't-shirts', 'pants', 'bags', 'accessories'];
+
+  // Inside your component, filter products based on current filters
+  const filteredProducts = products.filter(product => {
+    if (filters.newArrival && !product.newArrival) return false;
+    if (filters.category !== 'all' && product.category !== filters.category) return false;
+    if (filters.type !== 'all' && product.type !== filters.type) return false;
+    return true;
+  });
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -93,7 +101,7 @@ export default function ShopPage() {
             <div className="flex items-center justify-between md:justify-end gap-4">
               <div className="flex items-center gap-2 md:gap-4">
                 <span className="text-gray-300 font-melodrama text-sm md:text-base">
-                  {allProducts.length} products
+                  {filteredProducts.length} products
                 </span>
                 <CustomDropdown
                   value={filters.sortBy}
@@ -183,7 +191,7 @@ export default function ShopPage() {
 
       {/* Product Grid - Responsive grid */}
       <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
-        <ProductGrid products={allProducts} />
+        <ProductGrid products={filteredProducts} />
       </div>
     </div>
   );
