@@ -44,6 +44,19 @@ export default function ShopPage() {
     return true;
   });
 
+  useEffect(() => {
+    const category = searchParams.get('category');
+    const newArrival = searchParams.get('newArrival');
+    
+    if (category && (category === 'men' || category === 'women')) {
+      setFilters(prev => ({ ...prev, category: category as ProductCategory }));
+    }
+    
+    if (newArrival === 'true') {
+      setFilters(prev => ({ ...prev, newArrival: true }));
+    }
+  }, [searchParams]);
+
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Header - More responsive padding */}
