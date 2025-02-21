@@ -1,6 +1,6 @@
 'use client';
 
-import { FilterState, ProductType } from '@/types';
+import { FilterState, ProductType, ProductCategory } from '@/types';
 import PriceRangeSlider from './PriceRangeSlider';
 
 interface FilterBarProps {
@@ -16,21 +16,24 @@ const colors = ['black', 'white', 'gray', 'brown', 'blue', 'red'];
 const sizes = ['XS', 'S', 'M', 'L', 'XL'];
 
 export default function FilterBar({ filters, setFilters }: FilterBarProps) {
+  // Define categories with correct typing
+  const categories: (ProductCategory | 'all')[] = ['all', 'men', 'women'];
+
   return (
     <div className="py-4 flex flex-wrap gap-6 items-center text-white">
       {/* Category Filter */}
       <div className="flex gap-4">
-        {['all', 'men', 'women'].map((category) => (
+        {categories.map((category) => (
           <button
             key={category}
-            onClick={() => setFilters({ ...filters, category })}
+            onClick={() => setFilters({ ...filters, category: category })}
             className={`px-4 py-2 rounded-full border transition-colors ${
               filters.category === category
                 ? 'bg-white text-black border-white'
                 : 'border-gray-700 hover:border-white'
             }`}
           >
-            <span className="capitalize">{category}</span>
+            {category.charAt(0).toUpperCase() + category.slice(1)}
           </button>
         ))}
       </div>

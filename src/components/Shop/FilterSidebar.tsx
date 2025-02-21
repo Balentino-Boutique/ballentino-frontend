@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { FilterState, ProductType } from '@/types';
+import { FilterState, ProductType, ProductCategory } from '@/types';
 import PriceRangeSlider from './PriceRangeSlider';
 
 interface FilterSidebarProps {
@@ -11,20 +11,17 @@ interface FilterSidebarProps {
   onClose: () => void;
 }
 
-const productTypes: ProductType[] = [
-  't-shirts',
-  'pants',
-  'hoodies',
-  'dresses',
-  'bags',
-  'accessories',
-  'shoes'
-];
-
-const colors = ['black', 'white', 'gray', 'brown', 'blue', 'red'];
-const sizes = ['XS', 'S', 'M', 'L', 'XL'];
-
 export default function FilterSidebar({ filters, setFilters, isOpen, onClose }: FilterSidebarProps) {
+  // Define categories with correct typing
+  const categories: (ProductCategory | 'all')[] = ['all', 'men', 'women'];
+  
+  const productTypes: ProductType[] = [
+    't-shirts', 'pants', 'hoodies', 'dresses', 'bags', 'accessories', 'shoes'
+  ];
+
+  const colors = ['black', 'white', 'gray', 'brown', 'blue', 'red'];
+  const sizes = ['XS', 'S', 'M', 'L', 'XL'];
+
   return (
     <>
       {/* Backdrop */}
@@ -57,12 +54,12 @@ export default function FilterSidebar({ filters, setFilters, isOpen, onClose }: 
         <div className="mb-8">
           <h3 className="font-melodrama mb-4">Category</h3>
           <div className="space-y-2">
-            {['all', 'men', 'women'].map((category) => (
+            {categories.map((category) => (
               <label key={category} className="flex items-center gap-2">
                 <input
                   type="radio"
                   checked={filters.category === category}
-                  onChange={() => setFilters({ ...filters, category })}
+                  onChange={() => setFilters({ ...filters, category: category })}
                   className="form-radio text-accent"
                 />
                 <span className="capitalize">{category}</span>

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingBagIcon, UserIcon } from '@heroicons/react/24/outline';
+import { UserIcon } from '@heroicons/react/24/outline';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

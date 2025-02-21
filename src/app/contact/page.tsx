@@ -6,7 +6,7 @@ export default function ContactPage() {
           Contact Us
         </h1>
         <p className="text-gray-600 max-w-2xl mx-auto text-sm md:text-base">
-          We're here to help with any questions or concerns
+          We&apos;re here to help with any questions or concerns
         </p>
       </div>
 

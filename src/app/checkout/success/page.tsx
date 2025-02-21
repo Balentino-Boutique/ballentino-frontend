@@ -10,7 +10,7 @@ export default function CheckoutSuccessPage() {
         <CheckCircleIcon className="w-16 h-16 text-accent mx-auto mb-6" />
         <h1 className="text-3xl font-melodrama mb-4">Order Successful!</h1>
         <p className="text-gray-300 mb-8">
-          Thank you for your purchase. We'll send you an email with your order details shortly.
+          Thank you for your purchase. We&apos;ll send you an email with your order details shortly.
         </p>
         <div className="space-y-4">
           <Link 

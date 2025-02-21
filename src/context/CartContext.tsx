@@ -5,6 +5,15 @@ import { CartItem, Product } from '../types';
 import SidebarCart from '@/components/Cart/SidebarCart';
 import Notification from '@/components/Notification/Notification';
 
+// Define notification type
+type NotificationType = 'success' | 'error';
+
+interface Notification {
+  message: string;
+  type: NotificationType;
+  isVisible: boolean;
+}
+
 interface CartState {
   items: CartItem[];
   total: number;
@@ -21,8 +30,16 @@ interface CartContextType {
   dispatch: React.Dispatch<CartAction>;
   isCartOpen: boolean;
   setIsCartOpen: (isOpen: boolean) => void;
-  showNotification: (message: string, type: 'success' | 'error') => void;
+  notification: Notification;
+  showNotification: (message: string, type: NotificationType) => void;
 }
+
+// Update the initial notification state
+const initialNotification: Notification = {
+  message: '',
+  type: 'success',
+  isVisible: false
+};
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
@@ -102,18 +119,19 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(cartReducer, { items: [], total: 0 });
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [notification, setNotification] = useState({
-    message: '',
-    type: 'success' as const,
-    isVisible: false
-  });
+  const [notification, setNotification] = useState<Notification>(initialNotification);
 
-  const showNotification = (message: string, type: 'success' | 'error') => {
+  const showNotification = (message: string, type: NotificationType) => {
     setNotification({ message, type, isVisible: true });
+    
+    // Hide notification after 3 seconds
+    setTimeout(() => {
+      setNotification(prev => ({ ...prev, isVisible: false }));
+    }, 3000);
   };
 
   return (
-    <CartContext.Provider value={{ state, dispatch, isCartOpen, setIsCartOpen, showNotification }}>
+    <CartContext.Provider value={{ state, dispatch, isCartOpen, setIsCartOpen, notification, showNotification }}>
       {children}
       <SidebarCart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
       <Notification

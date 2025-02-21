@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import ProductGrid from '@/components/Shop/ProductGrid';
 import FilterBar from '@/components/Shop/FilterBar';
@@ -10,7 +10,11 @@ import { FilterState, Product, ProductCategory, ProductType } from '@/types';
 import { products } from '@/data/products';
 import { FunnelIcon } from '@heroicons/react/24/outline';
 
-export default function ShopPage() {
+// Add type for any
+type AnyEvent = MouseEvent | TouchEvent;
+
+// Create a component for the shop content
+function ShopContent() {
   const searchParams = useSearchParams();
   const initialCategory = (searchParams.get('category') as ProductCategory) || 'all';
 
@@ -207,5 +211,21 @@ export default function ShopPage() {
         <ProductGrid products={filteredProducts} />
       </div>
     </div>
+  );
+}
+
+// Main shop page component with Suspense
+export default function ShopPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-accent border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="font-melodrama">Loading...</p>
+        </div>
+      </div>
+    }>
+      <ShopContent />
+    </Suspense>
   );
 } 

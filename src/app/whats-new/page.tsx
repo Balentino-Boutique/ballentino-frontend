@@ -10,7 +10,7 @@ export default function WhatsNewPage() {
     <div className="min-h-screen bg-black text-white">
       <div className="text-center py-16 md:py-24 bg-white px-4">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-melodrama mb-4 text-black">
-          What's New
+          What&apos;s New
         </h1>
         <p className="text-gray-600 max-w-2xl mx-auto text-sm md:text-base">
           Discover our latest arrivals and trending pieces from our newest collections.

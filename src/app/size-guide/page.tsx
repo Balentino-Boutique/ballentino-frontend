@@ -13,7 +13,7 @@ export default function SizeGuidePage() {
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="space-y-12">
           <section>
-            <h2 className="text-2xl font-melodrama text-accent mb-6">Men's Sizing</h2>
+            <h2 className="text-2xl font-melodrama text-accent mb-6">Men&apos;s Sizing</h2>
             <div className="overflow-x-auto">
               <table className="w-full border-collapse">
                 <thead>
@@ -49,7 +49,7 @@ export default function SizeGuidePage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-melodrama text-accent mb-6">Women's Sizing</h2>
+            <h2 className="text-2xl font-melodrama text-accent mb-6">Women&apos;s Sizing</h2>
             <div className="overflow-x-auto">
               <table className="w-full border-collapse">
                 <thead>

@@ -7,6 +7,7 @@ import { useCart } from '@/context/CartContext';
 import { products } from '@/data/products';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import { AnimatePresence } from 'framer-motion';
 
 export default function ProductPage() {
   const params = useParams();
