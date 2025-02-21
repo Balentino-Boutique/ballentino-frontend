@@ -205,4 +205,130 @@ export const newArrivals: Product[] = [
     featured: true,
     newArrival: true
   }
-]; 
+];
+
+// Add these new products after your existing ones in newArrivals array
+export const additionalProducts: Product[] = [
+  {
+    id: 'p-1',
+    name: 'Leather Weekend Bag',
+    price: 95000,
+    images: [
+      'https://images.unsplash.com/photo-1547949003-9792a18a2601?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTZ8fGJsYWNrJTIwZmFzaGlvbiUyMGJyYW5kfGVufDB8fDB8fHww',
+      'https://images.unsplash.com/photo-1547949003-9792a18a2601?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTZ8fGJsYWNrJTIwZmFzaGlvbiUyMGJyYW5kfGVufDB8fDB8fHww'
+    ],
+    description: 'Premium leather weekend bag for the modern traveler',
+    category: 'men',
+    type: 'bags',
+    sizes: ['ONE SIZE'],
+    colors: ['brown', 'black'],
+    inStock: true,
+    featured: true,
+    newArrival: false
+  },
+  {
+    id: 'p-2',
+    name: 'Classic Chronograph Watch',
+    price: 150000,
+    images: [
+      'https://images.unsplash.com/photo-1622434641406-a158123450f9',
+      'https://images.unsplash.com/photo-1617714651073-27f0f7517fed'
+    ],
+    description: 'Elegant chronograph watch with leather strap',
+    category: 'men',
+    type: 'accessories',
+    sizes: ['ONE SIZE'],
+    colors: ['silver', 'gold'],
+    inStock: false,
+    featured: true,
+    newArrival: false
+  },
+  {
+    id: 'p-3',
+    name: 'Designer Tote Bag',
+    price: 78000,
+    images: [
+      'https://images.unsplash.com/photo-1584917865442-de89df76afd3',
+      'https://images.unsplash.com/photo-1591561954557-26941169b49e'
+    ],
+    description: 'Spacious designer tote bag for everyday use',
+    category: 'women',
+    type: 'bags',
+    sizes: ['ONE SIZE'],
+    colors: ['black', 'beige'],
+    inStock: true,
+    featured: true,
+    newArrival: false
+  },
+  {
+    id: 'p-4',
+    name: 'Pearl Necklace Set',
+    price: 45000,
+    images: [
+      'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338',
+      'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f'
+    ],
+    description: 'Elegant pearl necklace and earring set',
+    category: 'women',
+    type: 'accessories',
+    sizes: ['ONE SIZE'],
+    colors: ['pearl', 'gold'],
+    inStock: true,
+    featured: false,
+    newArrival: false
+  },
+  {
+    id: 'p-5',
+    name: 'Premium Leather Belt',
+    price: 28000,
+    images: [
+      'https://images.unsplash.com/photo-1631160246898-58192f971b5f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGxlYXRoZXIlMjBiZWx0fGVufDB8fDB8fHww',
+      'https://images.unsplash.com/photo-1624222247762-0699bfff5712'
+    ],
+    description: 'Premium leather belt with classic buckle',
+    category: 'men',
+    type: 'accessories',
+    sizes: ['32', '34', '36', '38', '40'],
+    colors: ['brown', 'black'],
+    inStock: true,
+    featured: false,
+    newArrival: false
+  },
+  {
+    id: 'p-6',
+    name: 'Designer Clutch',
+    price: 62000,
+    images: [
+      'https://images.unsplash.com/photo-1529025530948-67e8a5c69b58?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZGVzaWduZXIlMjBjbHV0Y2h8ZW58MHx8MHx8fDA%3D',
+      'https://images.unsplash.com/photo-1584917865442-de89df76afd3'
+    ],
+    description: 'Elegant evening clutch with chain strap',
+    category: 'women',
+    type: 'bags',
+    sizes: ['ONE SIZE'],
+    colors: ['gold', 'silver'],
+    inStock: true,
+    featured: true,
+    newArrival: false
+  },
+  // {
+  //   id: 'p-7',
+  //   name: 'Smart Watch',
+  //   price: 185000,
+  //   images: [
+  //     'https://images.unsplash.com/photo-1617043786394-ae546534f0f7',
+  //     'https://images.unsplash.com/photo-1616928231139-96aca73c1766'
+  //   ],
+  //   description: 'Premium smartwatch with health features',
+  //   category: 'men',
+  //   type: 'accessories',
+  //   sizes: ['ONE SIZE'],
+  //   colors: ['black', 'silver'],
+  //   inStock: false,
+  //   featured: true,
+  //   newArrival: false
+  // }
+];
+
+// Update your products array to include both new and existing products
+export const allProducts = [...newArrivals, ...additionalProducts]; 
