@@ -15,7 +15,7 @@ export default function ContactPage() {
           <div>
             <h2 className="text-2xl font-melodrama text-accent mb-4">Get in Touch</h2>
             <p className="text-gray-300">
-              Email: support@balentino.com<br />
+              Email: support@Ballentino.com<br />
               Phone: +1 234 567 8900<br />
               Hours: Monday - Friday, 9am - 5pm
             </p>

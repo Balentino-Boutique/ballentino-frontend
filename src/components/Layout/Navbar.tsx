@@ -39,7 +39,7 @@ const Navbar = () => {
           {/* Logo - Centered */}
           <div className="absolute left-1/2 transform -translate-x-1/2">
             <Link href="/" className="text-2xl font-melodrama tracking-wider">
-              BALENTINO
+              Ballentino
             </Link>
           </div>
 

@@ -36,15 +36,15 @@ const whisper = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Balentino | Luxury Fashion & Accessories",
-  description: "Discover luxury fashion, accessories and more at Balentino. Shop the latest collections of premium quality clothing and accessories.",
-  keywords: "Balentino, luxury fashion, designer clothing, accessories, Nigerian fashion",
+  title: "Ballentino | Luxury Fashion & Accessories",
+  description: "Discover luxury fashion, accessories and more at Ballentino. Shop the latest collections of premium quality clothing and accessories.",
+  keywords: "Ballentino, luxury fashion, designer clothing, accessories, Nigerian fashion",
   openGraph: {
-    title: "Balentino | Luxury Fashion & Accessories",
-    description: "Discover luxury fashion, accessories and more at Balentino",
+    title: "Ballentino | Luxury Fashion & Accessories",
+    description: "Discover luxury fashion, accessories and more at Ballentino",
     type: "website",
     locale: "en_US",
-    siteName: "Balentino",
+    siteName: "Ballentino",
   },
 };
 

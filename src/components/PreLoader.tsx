@@ -16,7 +16,7 @@ const PreLoader = () => {
 
   if (!isLoading) return null;
 
-  const letters = "BALENTINO".split("");
+  const letters = "Ballentino".split("");
   
   return (
     <motion.div
