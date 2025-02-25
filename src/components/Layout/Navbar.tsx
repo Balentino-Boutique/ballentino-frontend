@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { UserIcon } from '@heroicons/react/24/outline';
+import SearchBar from '@/components/Search/SearchBar';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -45,6 +46,7 @@ const Navbar = () => {
 
           {/* Right Menu */}
           <div className="hidden md:flex items-center space-x-6">
+            <SearchBar />
             <Link href="/account">
               <UserIcon className="h-5 w-5" />
             </Link>
@@ -66,6 +68,7 @@ const Navbar = () => {
 
           {/* Mobile menu button and cart */}
           <div className="md:hidden flex items-center space-x-4">
+            <SearchBar />
             <button
               onClick={() => setIsCartOpen(true)}
               className="relative p-2 hover:text-accent transition-colors"

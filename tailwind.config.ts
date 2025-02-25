@@ -17,7 +17,7 @@ export default {
       },
       fontFamily: {
         sans: ['var(--font-poppins)'],
-        melodrama: ['var(--font-melodrama)'],
+        garamond: ['var(--font-garamond)'],
         whisper: ['var(--font-whisper)'],
       },
     },

@@ -27,13 +27,13 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-melodrama);
-  font-weight: 500;
+  font-family: var(--font-garamond);
+  font-weight: 600;
 }
 
 .hero-text {
-  font-family: var(--font-melodrama);
-  font-weight: 600;
+  font-family: var(--font-garamond);
+  font-weight: 700;
 }
 
 .cursive-text {

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Poppins, EB_Garamond } from "next/font/google";
 import localFont from 'next/font/local';
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
@@ -14,20 +14,10 @@ const poppins = Poppins({
   variable: '--font-poppins',
 });
 
-const melodrama = localFont({
-  src: [
-    {
-      path: '../fonts/MelodramaMedium.ttf',
-      weight: '500',
-      style: 'normal',
-    },
-    {
-      path: '../fonts/MelodramaSemibold.ttf',
-      weight: '600',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-melodrama',
+const ebGaramond = EB_Garamond({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-garamond',
 });
 
 const whisper = localFont({
@@ -55,7 +45,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} ${melodrama.variable} ${whisper.variable}`}>
+      <body className={`${poppins.variable} ${ebGaramond.variable} ${whisper.variable}`}>
         <CartProvider>
           <Navbar />
           <MainWrapper>{children}</MainWrapper>
