@@ -6,17 +6,19 @@ import { useCart } from '@/context/CartContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { UserIcon } from '@heroicons/react/24/outline';
 import SearchBar from '@/components/Search/SearchBar';
+import Image from 'next/image';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { setIsCartOpen, state } = useCart();
 
-  // Update the navigation links
+  // Update the navigation links to include Perfumes
   const navLinks = [
     { name: "WHAT'S NEW", href: '/whats-new' },
     { name: 'MEN', href: '/shop?category=men' },
     { name: 'WOMEN', href: '/shop?category=women' },
-    { name: 'WHO WE ARE', href: '/about' }
+    { name: 'PERFUMES', href: '/shop?type=perfumes' },
+    // { name: 'WHO WE ARE', href: '/about' }
   ];
 
   return (
@@ -38,9 +40,18 @@ const Navbar = () => {
           </div>
 
           {/* Logo - Centered */}
-          <div className="absolute left-1/2 transform -translate-x-1/2">
-            <Link href="/" className="text-2xl font-melodrama tracking-wider">
-              Ballentino
+          <div className="absolute left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+            <Link href="/" className="flex flex-col items-center">
+              {/* <Image
+                src="/images/ballentino.png"
+                alt="Ballentino Logo"
+                width={40}
+                height={40}
+                className="mb-1"
+              /> */}
+              <span className="text-2xl font-garamond tracking-wider uppercase">
+                Ballentino
+              </span>
             </Link>
           </div>
 

@@ -6,7 +6,8 @@ export type ProductType =
   | 'dresses' 
   | 'bags' 
   | 'accessories'
-  | 'shoes';
+  | 'shoes'
+  | 'perfumes';
 
 export interface Product {
   id: string;

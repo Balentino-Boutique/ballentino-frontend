@@ -37,8 +37,8 @@ function ShopContent() {
   ];
 
   // Define the menu items with exact ProductType values
-  const menCategories: ProductType[] = ['t-shirts', 'hoodies', 'pants', 'shoes', 'bags', 'accessories'];
-  const womenCategories: ProductType[] = ['dresses', 't-shirts', 'pants', 'bags', 'accessories'];
+  const menCategories: ProductType[] = ['t-shirts', 'hoodies', 'pants', 'shoes', 'bags', 'accessories', 'perfumes'];
+  const womenCategories: ProductType[] = ['dresses', 't-shirts', 'pants', 'bags', 'accessories', 'perfumes'];
 
   // Inside your component, filter products based on current filters
   const filteredProducts = products.filter(product => {

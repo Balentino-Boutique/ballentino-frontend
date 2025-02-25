@@ -70,7 +70,7 @@ export default function SearchBar() {
         }));
 
       // Add matching product types
-      const types = ['t-shirts', 'hoodies', 'pants', 'dresses', 'accessories'];
+      const types = ['t-shirts', 'hoodies', 'pants', 'dresses', 'accessories', 'perfumes'];
       const matchingTypes = types
         .filter(type => type.includes(searchTermLower))
         .map(type => ({
@@ -110,52 +110,78 @@ export default function SearchBar() {
 
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="absolute right-0 mt-2 w-screen max-w-md bg-white dark:bg-gray-900 shadow-lg rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700"
-          >
-            <div className="p-4">
-              <div className="flex items-center gap-2 border-b border-gray-200 dark:border-gray-700 pb-2">
-                <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" />
-                <input
-                  type="text"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                  placeholder="Search products..."
-                  className="w-full bg-transparent focus:outline-none font-garamond text-lg"
-                  autoFocus
-                />
-              </div>
+          <>
+            {/* Overlay for both mobile and desktop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/50 z-40"
+              onClick={() => setIsOpen(false)}
+            />
 
-              <div className="mt-4">
-                {isLoading ? (
-                  <div className="flex items-center justify-center py-4">
-                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-accent"></div>
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="fixed top-0 left-0 right-0 mx-auto mt-20 
+                w-full max-w-[480px] bg-white dark:bg-gray-900 shadow-lg 
+                rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700
+                z-50"
+            >
+              <div className="p-4">
+                {/* Close button for mobile */}
+                <div className="flex items-center justify-between md:justify-start gap-2 
+                  border-b border-gray-200 dark:border-gray-700 pb-2">
+                  <div className="flex items-center flex-1">
+                    <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" />
+                    <input
+                      type="text"
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                      placeholder="Search products..."
+                      className="w-full bg-transparent focus:outline-none font-garamond text-lg px-2"
+                      autoFocus
+                    />
                   </div>
-                ) : suggestions.length > 0 ? (
-                  <div className="space-y-2">
-                    {suggestions.map((suggestion, index) => (
-                      <button
-                        key={index}
-                        onClick={() => handleSearch(suggestion)}
-                        className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors rounded-lg flex items-center gap-3"
-                      >
-                        <MagnifyingGlassIcon className="h-4 w-4 text-gray-400" />
-                        <span className="font-garamond">{suggestion.text}</span>
-                      </button>
-                    ))}
-                  </div>
-                ) : searchTerm.length > 0 ? (
-                  <p className="text-center text-gray-500 py-4 font-garamond">
-                    No results found
-                  </p>
-                ) : null}
+                  <button 
+                    onClick={() => setIsOpen(false)}
+                    className="md:hidden p-2 hover:text-accent"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                <div className="mt-4">
+                  {isLoading ? (
+                    <div className="flex items-center justify-center py-4">
+                      <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-accent"></div>
+                    </div>
+                  ) : suggestions.length > 0 ? (
+                    <div className="space-y-2">
+                      {suggestions.map((suggestion, index) => (
+                        <button
+                          key={index}
+                          onClick={() => handleSearch(suggestion)}
+                          className="w-full text-left px-4 py-2 hover:bg-gray-100 
+                            dark:hover:bg-gray-800 transition-colors rounded-lg 
+                            flex items-center gap-3"
+                        >
+                          <MagnifyingGlassIcon className="h-4 w-4 text-gray-400" />
+                          <span className="font-garamond">{suggestion.text}</span>
+                        </button>
+                      ))}
+                    </div>
+                  ) : searchTerm.length > 0 ? (
+                    <p className="text-center text-gray-500 py-4 font-garamond">
+                      No results found
+                    </p>
+                  ) : null}
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </div>

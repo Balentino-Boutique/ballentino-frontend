@@ -9,7 +9,7 @@ interface FilterBarProps {
 }
 
 const productTypes: ProductType[] = [
-  't-shirts', 'pants', 'hoodies', 'dresses', 'bags', 'accessories', 'shoes'
+  't-shirts', 'pants', 'hoodies', 'dresses', 'bags', 'accessories', 'shoes', 'perfumes'
 ];
 
 const colors = ['black', 'white', 'gray', 'brown', 'blue', 'red'];

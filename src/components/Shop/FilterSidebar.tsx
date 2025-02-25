@@ -15,8 +15,28 @@ export default function FilterSidebar({ filters, setFilters, isOpen, onClose }: 
   // Define categories with correct typing
   const categories: (ProductCategory | 'all')[] = ['all', 'men', 'women'];
   
+  // Update the menu items with perfumes
+  const menCategories: ProductType[] = [
+    't-shirts', 
+    'hoodies', 
+    'pants', 
+    'shoes', 
+    'bags', 
+    'accessories',
+    'perfumes'  // Added perfumes
+  ];
+
+  const womenCategories: ProductType[] = [
+    'dresses', 
+    't-shirts', 
+    'pants', 
+    'bags', 
+    'accessories',
+    'perfumes'  // Added perfumes
+  ];
+
   const productTypes: ProductType[] = [
-    't-shirts', 'pants', 'hoodies', 'dresses', 'bags', 'accessories', 'shoes'
+    't-shirts', 'pants', 'hoodies', 'dresses', 'bags', 'accessories', 'shoes', 'perfumes'
   ];
 
   const colors = ['black', 'white', 'gray', 'brown', 'blue', 'red'];

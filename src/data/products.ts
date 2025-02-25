@@ -342,21 +342,89 @@ export const products: Product[] = [
     featured: false,
     newArrival: false
   },
-  // {
-  //   id: 'p-7',
-  //   name: 'Smart Watch',
-  //   price: 185000,
-  //   images: [
-  //     'https://images.unsplash.com/photo-1617043786394-ae546534f0f7',
-  //     'https://images.unsplash.com/photo-1616928231139-96aca73c1766'
-  //   ],
-  //   description: 'Premium smartwatch with health features',
-  //   category: 'men',
-  //   type: 'accessories',
-  //   sizes: ['ONE SIZE'],
-  //   colors: ['black', 'silver'],
-  //   inStock: false,
-  //   featured: true,
-  //   newArrival: false
-  // }
+  {
+    id: 'p-perfume-1',
+    name: 'Midnight Allure',
+    price: 85000,
+    images: [
+      'https://images.unsplash.com/photo-1594035910387-fea47794261f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1594035910387-fea47794261f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
+    ],
+    description: 'A sophisticated fragrance with notes of vanilla, amber, and exotic woods',
+    category: 'men',
+    type: 'perfumes',
+    sizes: ['50ml', '100ml'],
+    colors: ['black'],
+    inStock: true,
+    featured: true,
+    newArrival: true
+  },
+  {
+    id: 'p-perfume-2',
+    name: 'Rose Elixir',
+    price: 92000,
+    images: [
+      'https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
+    ],
+    description: 'A luxurious feminine fragrance with Bulgarian rose, jasmine, and musk',
+    category: 'women',
+    type: 'perfumes',
+    sizes: ['50ml', '100ml'],
+    colors: ['gold'],
+    inStock: true,
+    featured: true,
+    newArrival: true
+  },
+  {
+    id: 'p-perfume-3',
+    name: 'Ocean Breeze',
+    price: 78000,
+    images: [
+      'https://images.unsplash.com/photo-1592914610354-fd354ea45e48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1594035910387-fea47794261f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
+    ],
+    description: 'Fresh aquatic scent with citrus, marine notes, and white musk',
+    category: 'men',
+    type: 'perfumes',
+    sizes: ['50ml', '100ml'],
+    colors: ['blue'],
+    inStock: true,
+    featured: false,
+    newArrival: true
+  },
+  {
+    id: 'p-perfume-4',
+    name: 'Golden Oud',
+    price: 150000,
+    images: [
+      'https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
+    ],
+    description: 'Premium oud fragrance with saffron, rose, and amber',
+    category: 'men',
+    type: 'perfumes',
+    sizes: ['50ml', '100ml'],
+    colors: ['gold'],
+    inStock: true,
+    featured: true,
+    newArrival: false
+  },
+  {
+    id: 'p-perfume-5',
+    name: 'Velvet Noir',
+    price: 98000,
+    images: [
+      'https://images.unsplash.com/photo-1594035910387-fea47794261f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1594035910387-fea47794261f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
+    ],
+    description: 'Intense and mysterious fragrance with black orchid and dark chocolate',
+    category: 'women',
+    type: 'perfumes',
+    sizes: ['50ml', '100ml'],
+    colors: ['black'],
+    inStock: true,
+    featured: true,
+    newArrival: true
+  }
 ]; 
