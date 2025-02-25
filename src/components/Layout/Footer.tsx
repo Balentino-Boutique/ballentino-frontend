@@ -69,28 +69,36 @@ export default function Footer() {
                   target="_blank"
                   className="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:border-accent hover:text-accent transition-colors"
                 >
-                  <FaXTwitter className="w-5 h-5" />
+                  <span className="w-5 h-5">
+                    <FaXTwitter />
+                  </span>
                 </Link>
                 <Link 
                   href="https://wa.me/yournumber" 
                   target="_blank"
                   className="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:border-accent hover:text-accent transition-colors"
                 >
-                  <FaWhatsapp className="w-5 h-5" />
+                  <span className="w-5 h-5">
+                    <FaWhatsapp />
+                  </span>
                 </Link>
                 <Link 
                   href="https://instagram.com/ballentino" 
                   target="_blank"
                   className="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:border-accent hover:text-accent transition-colors"
                 >
-                  <FaInstagram className="w-5 h-5" />
+                  <span className="w-5 h-5">
+                    <FaInstagram />
+                  </span>
                 </Link>
                 <Link 
                   href="https://facebook.com/ballentino" 
                   target="_blank"
                   className="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:border-accent hover:text-accent transition-colors"
                 >
-                  <FaFacebookF className="w-5 h-5" />
+                  <span className="w-5 h-5">
+                    <FaFacebookF />
+                  </span>
                 </Link>
               </div>
             </div>
