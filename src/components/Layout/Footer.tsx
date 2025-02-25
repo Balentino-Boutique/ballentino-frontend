@@ -1,6 +1,35 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaXTwitter, FaWhatsapp, FaInstagram, FaFacebookF } from 'react-icons/fa6';
+import { 
+  XMarkIcon, 
+  PhoneIcon,
+  ChatBubbleLeftIcon,
+  UserIcon
+} from '@heroicons/react/24/outline';
+
+// Update the social icons to use heroicons
+const socialIcons = [
+  {
+    Icon: XMarkIcon,
+    href: "https://twitter.com/ballentino",
+    label: "Twitter"
+  },
+  {
+    Icon: PhoneIcon,
+    href: "https://wa.me/yournumber",
+    label: "WhatsApp"
+  },
+  {
+    Icon: ChatBubbleLeftIcon,
+    href: "https://instagram.com/ballentino",
+    label: "Instagram"
+  },
+  {
+    Icon: UserIcon,
+    href: "https://facebook.com/ballentino",
+    label: "Facebook"
+  }
+];
 
 export default function Footer() {
   return (
@@ -64,42 +93,18 @@ export default function Footer() {
             <div>
               <h3 className="font-melodrama text-lg mb-4">Follow Us</h3>
               <div className="flex space-x-4">
-                <Link 
-                  href="https://twitter.com/ballentino" 
-                  target="_blank"
-                  className="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:border-accent hover:text-accent transition-colors"
-                >
-                  <span className="w-5 h-5">
-                    <FaXTwitter />
-                  </span>
-                </Link>
-                <Link 
-                  href="https://wa.me/yournumber" 
-                  target="_blank"
-                  className="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:border-accent hover:text-accent transition-colors"
-                >
-                  <span className="w-5 h-5">
-                    <FaWhatsapp />
-                  </span>
-                </Link>
-                <Link 
-                  href="https://instagram.com/ballentino" 
-                  target="_blank"
-                  className="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:border-accent hover:text-accent transition-colors"
-                >
-                  <span className="w-5 h-5">
-                    <FaInstagram />
-                  </span>
-                </Link>
-                <Link 
-                  href="https://facebook.com/ballentino" 
-                  target="_blank"
-                  className="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:border-accent hover:text-accent transition-colors"
-                >
-                  <span className="w-5 h-5">
-                    <FaFacebookF />
-                  </span>
-                </Link>
+                {socialIcons.map(({ Icon, href, label }) => (
+                  <Link 
+                    key={label}
+                    href={href} 
+                    target="_blank"
+                    className="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:border-accent hover:text-accent transition-colors"
+                  >
+                    <span className="w-5 h-5">
+                      <Icon />
+                    </span>
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
