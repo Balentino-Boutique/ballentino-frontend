@@ -1,13 +1,14 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useCart } from '@/context/CartContext';
-import { products } from '@/data/products';
+import { getProducts } from '@/data/products';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { AnimatePresence } from 'framer-motion';
+import { Product } from '@/types';
 
 export default function ProductPage() {
   const params = useParams();
@@ -17,11 +18,28 @@ export default function ProductPage() {
   const [selectedImage, setSelectedImage] = useState(0);
   const { dispatch, showNotification, setIsCartOpen } = useCart();
   const sliderRef = useRef<HTMLDivElement>(null);
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const fetchedProducts = await getProducts();
+        setProducts(fetchedProducts);
+      } catch (error) {
+        console.error("Error loading products:", error);
+      }
+    };
+
+    loadProducts();
+  }, []);
+
+  console.log('products', products);
+  console.log('params', params);
 
   // Find product from your data
   const product = products.find(p => p.id === params.id);
 
-  if (!product) return <div>Product not found</div>;
+  if (!product) return <div className='text-center text-2xl font-melodrama justify-center items-center h-screen'>Product not found</div>;
 
   const addToCart = () => {
     if (!selectedSize) {

@@ -2,14 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { products } from "@/data/products";
+import { getProducts, fallbackProducts } from "@/data/products";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { motion } from 'framer-motion';
 import PreLoader from '@/components/PreLoader';
 import Hero from '@/components/Hero/Hero';
 import ImageGrid from '@/components/ImageGrid/ImageGrid';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useCart } from '@/context/CartContext';
+import { Product } from "@/types";
 
 const fashionImages = [
   {
@@ -30,11 +31,28 @@ const fashionImages = [
   }
 ];
 
-const newArrivalsProducts = products.filter(product => product.newArrival);
-
 export default function Home() {
   const sliderRef = useRef<HTMLDivElement>(null);
   const { dispatch, showNotification, setIsCartOpen } = useCart();
+  const [products, setProducts] = useState<Product[]>(fallbackProducts);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const fetchedProducts = await getProducts();
+        setProducts(fetchedProducts);
+      } catch (error) {
+        console.error("Error loading products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, []);
+
+  const newArrivalsProducts = products.filter(product => product.newArrival);
 
   const scroll = (direction: 'left' | 'right') => {
     if (sliderRef.current) {

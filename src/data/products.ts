@@ -1,7 +1,43 @@
 import { Product } from '../types';
 
-// Single consolidated products array
-export const products: Product[] = [
+// Function to transform backend product data to match our Product type
+const transformBackendProduct = (backendProduct: any): Product => {
+  // Parse the infos JSON string if it exists
+  let parsedInfos = [];
+  try {
+    if (backendProduct.infos) {
+      parsedInfos = JSON.parse(backendProduct.infos);
+    }
+  } catch (error) {
+    console.error('Error parsing infos:', error);
+  }
+
+  // Transform the backend product to match our Product type
+  return {
+    id: `${backendProduct.id}` || `product-${backendProduct.id}`,
+    name: backendProduct.name || 'Unnamed Product',
+    price: parseInt(backendProduct.amount) || 0,
+    images: backendProduct.images && backendProduct.images.length > 0 
+      ? backendProduct.images.map((img: any) => img.url || '') 
+      : [
+          'https://ballentinostore.com/images/noimage.png',
+          'https://ballentinostore.com/images/noimage.png'
+        ],
+    description: parsedInfos.length > 0 
+      ? parsedInfos.map((info: any) => `${info.title}: ${info.value}`).join(', ')
+      : 'No description available',
+    category: backendProduct.category || 'uncategorized',
+    type: backendProduct.category || 'uncategorized',
+    sizes: backendProduct.size || ['ONE SIZE'],
+    colors: ['black', 'white'], // Default colors since backend doesn't provide this
+    inStock: backendProduct.stock && parseInt(backendProduct.stock) > 0,
+    featured: backendProduct.status === 'active',
+    newArrival: new Date(backendProduct.created_at).getTime() > (Date.now() - 30 * 24 * 60 * 60 * 1000) // Consider new if less than 30 days old
+  };
+};
+
+// Fallback products array to use if API fails
+export const fallbackProducts: Product[] = [
   {
     id: 'new-1',
     name: 'Urban Street Style',
@@ -427,4 +463,66 @@ export const products: Product[] = [
     featured: true,
     newArrival: true
   }
-]; 
+];
+
+// Function to fetch products from the backend
+export const fetchProducts = async (): Promise<Product[]> => {
+  try {
+    const response = await fetch('https://prod.ballentinostore.com/products?page=1&limit=10', {
+      cache: 'no-store', // Disable caching to always get fresh data
+      next: { revalidate: 60 } // Revalidate every 60 seconds as a fallback
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    
+    if (data && !data.error && data.products && data.products.data && data.products.data.length > 0) {
+      console.log('Successfully fetched backend products:', data.products.data.length);
+      return data.products.data.map(transformBackendProduct);
+    } else {
+      console.error('Invalid or empty response format from backend:', data);
+      return fallbackProducts;
+    }
+  } catch (error) {
+    console.error('Error fetching products from backend:', error);
+    return fallbackProducts;
+  }
+};
+
+// Create a products store that will be updated with backend data
+let _products: Product[] = [];
+
+// Export a function to get products that ensures backend data is loaded
+export async function getProducts(): Promise<Product[]> {
+  // If we already have products, return them
+  if (_products.length > 0) {
+    return _products;
+  }
+  
+  // Otherwise fetch from backend
+  try {
+    const backendProducts = await fetchProducts();
+    if (backendProducts && backendProducts.length > 0) {
+      _products = backendProducts;
+      return _products;
+    }
+  } catch (error) {
+    console.error('Failed to fetch products:', error);
+  }
+  
+  // If backend fetch fails, use fallback
+  _products = fallbackProducts;
+  return _products;
+}
+
+// For backward compatibility, also export a products array
+// This will be populated with backend data as soon as possible
+export let products: Product[] = [];
+
+// Initialize products immediately
+(async () => {
+  products = await getProducts();
+})(); 

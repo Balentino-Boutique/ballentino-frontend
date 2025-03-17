@@ -13,7 +13,8 @@ const nextConfig = {
       'www.zttw.store',
       'encrypted-tbn0.gstatic.com',
       'images.unsplash.com',
-      'plus.unsplash.com'
+      'plus.unsplash.com',  
+      'ballentinostore.com'
     ],
     remotePatterns: [
       {
