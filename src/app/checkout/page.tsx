@@ -20,7 +20,7 @@ interface CustomerDetails {
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { state: cartState, dispatch } = useCart();
+  const { state: cartState, dispatch, showNotification } = useCart();
   const [currentStep, setCurrentStep] = useState<CheckoutStep>('details');
   const [customerDetails, setCustomerDetails] = useState<CustomerDetails>({
     firstName: '',
@@ -32,6 +32,9 @@ export default function CheckoutPage() {
     state: '',
     zipCode: ''
   });
+  const [paymentType, setPaymentType] = useState<'transfer' | 'card'>('transfer');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [receiptFile, setReceiptFile] = useState<File | null>(null);
 
   const steps = [
     { id: 'details', name: 'Customer Details' },
@@ -55,10 +58,68 @@ export default function CheckoutPage() {
     setCurrentStep('review');
   };
 
-  const handleOrderComplete = () => {
-    // Simulate order completion
-    dispatch({ type: 'CLEAR_CART' });
-    router.push('/checkout/success');
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setReceiptFile(e.target.files[0]);
+    }
+  };
+
+  const handleOrderComplete = async () => {
+    if (isSubmitting) return;
+    
+    setIsSubmitting(true);
+    
+    try {
+      // Create form data to send to backend
+      const formData = new FormData();
+      
+      // Add customer details
+      formData.append('email', customerDetails.email);
+      formData.append('first_name', customerDetails.firstName);
+      formData.append('last_name', customerDetails.lastName);
+      formData.append('payment_type', paymentType);
+      
+      // Add shipping details as JSON
+      const shippingDetails = {
+        address: customerDetails.address,
+        city: customerDetails.city,
+        state: customerDetails.state,
+        zipCode: customerDetails.zipCode
+      };
+      formData.append('shipping', JSON.stringify(shippingDetails));
+      
+      // Add products
+      cartState.items.forEach((item, index) => {
+        formData.append(`product[${index}][product_id]`, item.product.id);
+        formData.append(`product[${index}][product_name]`, item.product.name);
+        formData.append(`product[${index}][quantity]`, item.quantity.toString());
+        formData.append(`product[${index}][price]`, item.product.price.toString());
+      });
+      
+      // Add receipt file if payment type is transfer
+      if (paymentType === 'transfer' && receiptFile) {
+        formData.append('receipt', receiptFile);
+      }
+      
+      // Send to backend
+      const response = await fetch('https://prod.ballentinostore.com/orders', {
+        method: 'POST',
+        body: formData,
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to create order');
+      }
+      
+      // Clear cart and redirect to success page
+      dispatch({ type: 'CLEAR_CART' });
+      router.push('/checkout/success');
+    } catch (error) {
+      console.error('Error creating order:', error);
+      showNotification('There was an error processing your order. Please try again.', 'error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const totalAmount = cartState.items.reduce(
@@ -229,18 +290,69 @@ export default function CheckoutPage() {
             )}
 
             {currentStep === 'payment' && (
-              <div className="space-y-4">
+              <form onSubmit={handlePaymentSubmit} className="space-y-4">
                 <h2 className="text-2xl font-melodrama mb-6">Payment</h2>
-                <p className="text-gray-300">
-                  Click the button below to complete your payment through our secure payment gateway.
-                </p>
-                <button 
-                  onClick={handlePaymentSubmit}
-                  className={buttonStyle}
-                >
-                  Proceed to Payment
+                
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="font-melodrama mb-3">Payment Method</h3>
+                    <div className="flex flex-col space-y-3">
+                      <label className="flex items-center space-x-3 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="paymentType"
+                          value="transfer"
+                          checked={paymentType === 'transfer'}
+                          onChange={() => setPaymentType('transfer')}
+                          className="form-radio h-5 w-5 text-accent"
+                        />
+                        <span>Bank Transfer</span>
+                      </label>
+                      
+                      <label className="flex items-center space-x-3 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="paymentType"
+                          value="card"
+                          checked={paymentType === 'card'}
+                          onChange={() => setPaymentType('card')}
+                          className="form-radio h-5 w-5 text-accent"
+                        />
+                        <span>Card Payment</span>
+                      </label>
+                    </div>
+                  </div>
+                  
+                  {paymentType === 'transfer' && (
+                    <div className="space-y-3 bg-gray-900 p-4 rounded-md">
+                      <h4 className="font-melodrama">Bank Transfer Details</h4>
+                      <p className="text-sm text-gray-300">
+                        Please transfer the total amount to the following account:
+                      </p>
+                      <div className="text-sm space-y-1">
+                        <p><span className="text-gray-400">Bank:</span> First Bank</p>
+                        <p><span className="text-gray-400">Account Name:</span> Ballentino Store</p>
+                        <p><span className="text-gray-400">Account Number:</span> 1234567890</p>
+                        <p><span className="text-gray-400">Amount:</span> ₦{(totalAmount + 2500).toLocaleString()}</p>
+                      </div>
+                      <div className="mt-4">
+                        <label className="block text-sm mb-2">Upload Payment Receipt</label>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleFileChange}
+                          required
+                          className="w-full text-sm text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-melodrama file:bg-gray-800 file:text-white hover:file:bg-gray-700"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+                
+                <button type="submit" className={buttonStyle}>
+                  {paymentType === 'transfer' ? 'Continue to Review' : 'Proceed to Payment Gateway'}
                 </button>
-              </div>
+              </form>
             )}
 
             {currentStep === 'review' && (
@@ -258,12 +370,20 @@ export default function CheckoutPage() {
                     <p>{customerDetails.address}</p>
                     <p>{customerDetails.city}, {customerDetails.state} {customerDetails.zipCode}</p>
                   </div>
+                  <div>
+                    <h3 className="font-melodrama mb-2">Payment Method</h3>
+                    <p>{paymentType === 'transfer' ? 'Bank Transfer' : 'Card Payment'}</p>
+                    {paymentType === 'transfer' && receiptFile && (
+                      <p className="text-sm mt-1">Receipt uploaded: {receiptFile.name}</p>
+                    )}
+                  </div>
                 </div>
                 <button 
                   onClick={handleOrderComplete}
-                  className={buttonStyle}
+                  disabled={isSubmitting}
+                  className={`${buttonStyle} ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
                 >
-                  Complete Order
+                  {isSubmitting ? 'Processing...' : 'Complete Order'}
                 </button>
               </div>
             )}
