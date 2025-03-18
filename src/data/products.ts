@@ -18,7 +18,7 @@ const transformBackendProduct = (backendProduct: any): Product => {
     name: backendProduct.name || 'Unnamed Product',
     price: parseInt(backendProduct.amount) || 0,
     images: backendProduct.images && backendProduct.images.length > 0 
-      ? backendProduct.images.map((img: any) => img.url || '') 
+      ? backendProduct.images 
       : [
           'https://ballentinostore.com/images/noimage.png',
           'https://ballentinostore.com/images/noimage.png'

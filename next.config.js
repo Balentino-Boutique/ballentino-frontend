@@ -14,7 +14,8 @@ const nextConfig = {
       'encrypted-tbn0.gstatic.com',
       'images.unsplash.com',
       'plus.unsplash.com',  
-      'ballentinostore.com'
+      'ballentinostore.com',
+      'prod.ballentinostore.com'
     ],
     remotePatterns: [
       {
